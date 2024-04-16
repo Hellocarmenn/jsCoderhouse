@@ -41,6 +41,11 @@ function buscarProducto(nomProducto) {
 }
 
 function contarProductos() {
-    alert('Cantidad de productos disponibles: ' + productos.length);
+    let productosString = 'Lista de productos disponibles:\n';
+    productos.forEach(producto => {
+        productosString += `${producto.nombre}\n`;
+    });
+    alert('Cantidad de productos disponibles: ' + productos.length + productosString);
+
 }
 
