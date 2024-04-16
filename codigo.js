@@ -1,4 +1,4 @@
-let funcionalidad = parseInt(prompt('Bienvenido a DevCoffe \n¿Qué deseas comprar? \n 1.- Bebida Caliente  \n 2.- Bebida Fria'));
+let funcionalidad = parseInt(prompt('Bienvenido a DevCoffe \n¿Qué deseas comprar? \n 1.- Bebida Caliente  \n 2.- Bebida Fria \n 3.-Mostrar la Cantidad Total de Productos'));
 
 while (funcionalidad !== 0) {
     switch (funcionalidad) {
@@ -13,22 +13,23 @@ while (funcionalidad !== 0) {
         case 2:
             let bebidaFria = prompt('Buena Elección!\nIngresa qué deseas comprar\nFrapuchino\nCapuchino Helado\nHelado Shaken \nMango Dragonfruit ');
             if (bebidaFria !== '') {
-                buscarProducto(bebidaFria); // Usar bebidaFria en lugar de nombre
+                cantidadProductosSeleccionados++; // Incrementar la cantidad de productos seleccionados
             } else {
                 alert('No ingresaste ningún producto');
             }
+            break;
+        case 3:
+            contarProductos();
             break;
         default:
             alert("Código inválido");
     }
 
-    funcionalidad = parseInt(prompt('Bienvenido a DevCoffe \n¿Qué deseas comprar? \n 1.- Bebida Caliente  \n 2.- Bebida Fria'));
+    funcionalidad = parseInt(prompt('Bienvenido a DevCoffe \n¿Qué deseas comprar? \n 1.- Bebida Caliente  \n 2.- Bebida Fria \n 3.- Ver Carrito'));
 }
 
-function filtrarPorTamaño(tamano) {
-    // Implementar lógica para filtrar productos por tamaño
-}
 
+// Función para buscar un producto en la lista de productos
 function buscarProducto(nomProducto) {
     let productoEncontrado = productos.find(producto => producto.nombre.toLowerCase().includes(nomProducto.toLowerCase()));
 
@@ -38,3 +39,8 @@ function buscarProducto(nomProducto) {
         console.log('Producto no encontrado');
     }
 }
+
+function contarProductos() {
+    alert('Cantidad de productos disponibles: ' + productos.length);
+}
+
