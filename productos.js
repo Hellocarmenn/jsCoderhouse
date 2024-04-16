@@ -1,39 +1,51 @@
 const productos =[
     {
         id:1,
-        nombre:'Capuchino',
+        nombre:'Americano',
         precio:80,
         tamano:'Grande',
     },
     {
         id:2,
-        nombre:'Cafe Americano',
+        nombre:'Capuchino',
         precio:65,
         tamano:'Grande',
     },
 
     {
         id:3,
-        nombre:'Matcha',
+        nombre:'Mocha',
         precio:90,
         tamano:'Grande',
     },
     {
         id:4,
-        nombre:'Capuchino',
+        nombre:'Latte',
         precio:40,
         tamano:'Chico',
     },
     {
         id:5,
-        nombre:'Cafe Americano',
+        nombre:'Frapuchino',
         precio:35,
         tamano:'Chico',
     },
 
     {
         id:6,
-        nombre:'Matcha',
+        nombre:'Capuchino Helado',
+        precio:45,
+        tamano:'Mediano',
+    },
+    {
+        id:7,
+        nombre:'Helado Shaken',
+        precio:45,
+        tamano:'Mediano',
+    },
+    {
+        id:8,
+        nombre:'Mango Dragonfruit',
         precio:45,
         tamano:'Mediano',
     },
