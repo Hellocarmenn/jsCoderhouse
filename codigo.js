@@ -1,51 +1,66 @@
-let funcionalidad = parseInt(prompt('Bienvenido a DevCoffe \n¿Qué deseas comprar? \n 1.- Bebida Caliente  \n 2.- Bebida Fria \n 3.-Mostrar la Cantidad Total de Productos'));
+let funcionalidad = parseInt(prompt('Ingresa la opcion deseada\n1-Filtrar por prioridad de tarea\n2-Buscar tarea por nombre\n3-Mostrar cantidad de tareas pendientes\n0-PARA SALIR'));
 
-while (funcionalidad !== 0) {
+
+while (funcionalidad != 0) {
     switch (funcionalidad) {
         case 1:
-            let bebidaCaliente = prompt('Buena Elección!\nIngresa qué deseas comprar\nAmericano \nCapuchino\nMocha \n Latte');
-            if (bebidaCaliente !== '') {
-                buscarProducto(bebidaCaliente); // Usar bebidaCaliente en lugar de nombre
-            } else {
-                alert('No ingresaste ningún producto');
-            }
+            //filtrado
+            let opcion = parseInt(prompt('Visualizar tareas por prioridad\n1-Alta\n2-Media\n3-Baja'));
+            filtrarPorPrioridad(opcion);
             break;
         case 2:
-            let bebidaFria = prompt('Buena Elección!\nIngresa qué deseas comprar\nFrapuchino\nCapuchino Helado\nHelado Shaken \nMango Dragonfruit ');
-            if (bebidaFria !== '') {
-                cantidadProductosSeleccionados++; // Incrementar la cantidad de productos seleccionados
+            //busqueda por nombre de tarea
+            let nombre = prompt('Ingresa el nombre de la tarea a buscar');
+            if (nombre != '') {
+                buscarTarea(nombre);
             } else {
-                alert('No ingresaste ningún producto');
+                alert('No ingresaste ninguna tarea')
             }
             break;
         case 3:
-            contarProductos();
+            //funcion que cuenta la cantidad de tareas pendientes
+            contarTareas();
             break;
         default:
-            alert("Código inválido");
+            alert('Opcion invalida!');
+            break;
     }
 
-    funcionalidad = parseInt(prompt('Bienvenido a DevCoffe \n¿Qué deseas comprar? \n 1.- Bebida Caliente  \n 2.- Bebida Fria \n 3.- Ver Carrito'));
+    funcionalidad = parseInt(prompt('Ingresa la opcion deseada\n1-Filtrar por prioridad de tarea\n2-Buscar tarea por nombre\n3-Mostrar cantidad de tareas pendientes\n0-PARA SALIR'));
 }
 
 
-// Función para buscar un producto en la lista de productos
-function buscarProducto(nomProducto) {
-    let productoEncontrado = productos.find(producto => producto.nombre.toLowerCase().includes(nomProducto.toLowerCase()));
-
-    if (productoEncontrado !== undefined) {
-        alert(`Producto encontrado:\nNombre: ${productoEncontrado.nombre}\nTamaño: ${productoEncontrado.tamano}\nPrecio: ${productoEncontrado.precio}`);
+function filtrarPorPrioridad(prioridad) {
+    let filtrados = [];
+    if (prioridad == 1) {
+        filtrados = tareas.filter(tarea => tarea.prioridad.toLowerCase() == "alta");
+    } else if (prioridad == 2) {
+        filtrados = tareas.filter(tarea => tarea.prioridad.toLowerCase() == "media");
+    } else if (prioridad == 3) {
+        filtrados = tareas.filter(tarea => tarea.prioridad.toLowerCase() == "baja");
     } else {
-        console.log('Producto no encontrado');
+        alert('prioridad invalida');
+    }
+    console.table(filtrados);
+}
+
+
+function buscarTarea(nomTarea) {
+    let tareaEncontrada = tareas.find(tarea => tarea.nombre.toLowerCase().includes(nomTarea.toLowerCase()));
+
+    if (tareaEncontrada != undefined) {
+        alert(`La tarea fue encontrada:\nID:${tareaEncontrada.id} \nNOMBRE:${tareaEncontrada.nombre} \nDURACION: ${tareaEncontrada.duracion} \nPRIORIDAD: ${tareaEncontrada.prioridad} \nFECHA: ${tareaEncontrada.fecha.toLocaleDateString()}`);
+    } else {
+        console.log('Tarea no encontrada');
     }
 }
 
-function contarProductos() {
-    let productosString = 'Lista de productos disponibles:\n';
-    productos.forEach(producto => {
-        productosString += `${producto.nombre}\n`;
-    });
-    alert('Cantidad de productos disponibles: ' + productos.length + productosString);
 
+function contarTareas() {
+    alert('Cantidad de tareas pendientes: ' + tareas.length);
+    alert()
 }
+
+
+
 
