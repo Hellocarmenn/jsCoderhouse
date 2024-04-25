@@ -42,6 +42,8 @@ header{
     align-items: center;
     padding: 18px 100px;
     transition: 0.5 linear;
+    background: black;
+
 }
 .header.shadow{
     background:var(--text-color);
