@@ -3,6 +3,20 @@ document.querySelector('#search-icon').onclick = () => {
     search.classList.toggle('active');
 }
 
+let navbar = document.querySelector('.navbar');
+document.querySelector('#menu-icon').onclick = () => {
+    search.classList.toggle('active');
+}
+
+
+
+
+ let header = document.querySelector('header');
+ window.addEventListener('scroll', () =>{
+    header.classList.toggle('shadow',window.scrollY > 0);
+
+ });
+
 console.table(productos);
 let carrito = [];
 
@@ -10,6 +24,23 @@ const contenedorProds = document.getElementById('products');
 const tablaBody = document.getElementById('tablabody');
 const botonFinalizar = document.getElementById('finalizarBtn');
 const botonVaciar = document.getElementById('vaciarBtn');
+
+//LUXON
+const DateTime = luxon.DateTime;
+const fechaImportante = DateTime.fromObject(
+    { day: 22, hour: 12, month: 2, year: 2021 },
+    { zone: 'America/Buenos_Aires', numberingSystem: 'beng' }
+)
+
+console.log(fechaImportante.toString());
+
+const otraFecha = DateTime.fromISO("2017-05-15T08:30:00");
+console.log(otraFecha.toString());
+
+const ahora = DateTime.now();
+const diasEnElMes = ahora.daysInMonth;
+const diasParaFinDeMes = diasEnElMes - ahora.day;
+
 
 
 function renderizarProductos(listaProds) {
@@ -22,7 +53,7 @@ function renderizarProductos(listaProds) {
           <h3>Nombre: ${prod.nombre}</h3>
           <div class="content">
             <span>$${prod.precio}</span>
-            <a href="#"><button class="btn btn-primary compra" id=${prod.id}>Agregar al carrito</button>
+            <button class="btn btn-primary compra" id=${prod.id}>Agregar al carrito</button>
             </a>
           </div>
         </div>
@@ -50,12 +81,13 @@ function agregarACarrito(producto) {
     carrito.push(producto);
     /* sweet alert */
     Swal.fire({
-        title: "Felicitaciones!",
-        text: `Agregaste ${producto.nombre} al carro 🛒`,
+        title: "MUY BIEN!",
+        text: `Agregaste ${producto.nombre} al carrito 🛒`,
         imageUrl: producto.foto,
-        imageWidth: 200,
-        imageHeight: 200,
+        imageWidth: 300,
+        imageHeight: 300,
         imageAlt: producto.nombre,
+        confirmButtonColor: '#bc9667',
     });
     console.table(carrito);
     tablaBody.innerHTML += `
@@ -66,46 +98,36 @@ function agregarACarrito(producto) {
     </tr>
     `
     //agregar calculo de total
-    let totalAcumulado = carrito.reduce((acum, prod)=> acum + prod.precio,0);
-    document.getElementById('total').innerText = 'Total a pagar $: '+totalAcumulado;
-}
-
-
-//evento submit del formulario
-const formulario = document.getElementById('formulario');
-
-formulario.addEventListener('submit', validar);
-
-function validar(ev) {
-    if ((campoNombre.value == '') || (campoEmail.value == '')) {
-        ev.preventDefault();
-        alert('Ingrese nombre o email faltante 🚨');
-    }
+    let totalAcumulado = carrito.reduce((acum, prod) => acum + prod.precio, 0);
+    document.getElementById('total').innerText = 'Total a pagar $: ' + totalAcumulado;
 }
 
 //evento para finalizar la compra
-botonFinalizar.onclick=()=>{
+botonFinalizar.onclick = () => {
     Toastify({
-        text: ahora.toLocaleString(DateTime.DATE_SHORT)+' - Gracias por tu compra! Recibirás el pedido en 48hs',
-        duration: 5000,
-        gravity:'bottom',
-        position:'left',
+        text: ahora.toLocaleString(DateTime.DATE_SHORT) + ' - Gracias por tu compra! Recibirás el pedido en 48hs',
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
         close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "center", // `left`, `center` or `right`
+        stopOnFocus: true,
         style: {
             background: "linear-gradient(to right, #00b09b, #96c93d)",
-          },
+        },
     }).showToast();
 
     vaciarCarro();
 }
 
-function vaciarCarro(){
-    carrito=[];
-    tablaBody.innerHTML='';
+function vaciarCarro() {
+    carrito = [];
+    tablaBody.innerHTML = '';
     document.getElementById('total').innerText = 'Total a pagar $: ';
 }
 
 //vaciar carro
-botonVaciar.onclick=()=>{
+botonVaciar.onclick = () => {
     vaciarCarro();
 }
