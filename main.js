@@ -103,23 +103,26 @@ function agregarACarrito(producto) {
 }
 
 //evento para finalizar la compra
+//evento para finalizar la compra
 botonFinalizar.onclick = () => {
-    Toastify({
-        text: ahora.toLocaleString(DateTime.DATE_SHORT) + ' - Gracias por tu compra! Recibirás el pedido en 48hs',
-        duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
-        newWindow: true,
-        close: true,
-        gravity: "bottom", // `top` or `bottom`
-        position: "center", // `left`, `center` or `right`
-        stopOnFocus: true,
-        style: {
-            background: "linear-gradient(to right, #00b09b, #96c93d)",
-        },
-    }).showToast();
-
-    vaciarCarro();
+    if (carrito.length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Tu carrito está vacío, ¡agrega algunos productos primero!',
+            confirmButtonColor: '#bc9667',
+        });
+    } else {
+        Swal.fire({
+            title: "Compra finalizada!",
+            text: `Gracias por tu compra 🛒`,
+            icon: 'success',
+            confirmButtonColor: '#bc9667',
+        });
+        vaciarCarro();
+    }
 }
+
 
 function vaciarCarro() {
     carrito = [];
