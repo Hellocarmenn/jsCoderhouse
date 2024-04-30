@@ -1,3 +1,29 @@
+/*LOCALSTORE */
+
+/**Funcion para guardar el carrito en el almacenamiento local */
+function guardarCarritoEnLocalStorage(){
+    localStorage.setItem('carrito',JSON.stringify(carrito));
+}
+
+/*Funcion para cargar  el carrito desde el almacenamiento del local al cargar la pagina */
+function cargarCarritoDesdeElLocalStorage(){
+    const carritoGuardado = localStorage.getItem('carrito');
+    if (carritoGuardado){
+        carrito.JSON.parse(carritoGuardado);
+        /*Renderizar los productos del carrito al cargar la pagina */
+        carrito.forEach(producto => agregarProductoAlCarrito(producto));
+    }
+}
+
+
+
+
+
+
+
+
+
+
 let search = document.querySelector('.search-box');
 document.querySelector('#search-icon').onclick = () => {
     search.classList.toggle('active');
@@ -79,6 +105,7 @@ renderizarProductos(productos);
 
 function agregarACarrito(producto) {
     carrito.push(producto);
+    guardarCarritoEnLocalStorage();
     /* sweet alert */
     Swal.fire({
         title: "MUY BIEN!",
@@ -128,6 +155,8 @@ function vaciarCarro() {
     carrito = [];
     tablaBody.innerHTML = '';
     document.getElementById('total').innerText = 'Total a pagar $: ';
+    guardarCarritoEnLocalStorage();
+
 }
 
 //vaciar carro
