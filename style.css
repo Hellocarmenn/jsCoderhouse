@@ -26,6 +26,8 @@ section{
 
 img{
     width: 100%;
+    border-radius: 0.5rem;
+
 }
 body{
     color: var(--text-color);
@@ -225,6 +227,7 @@ header{
     font-weight: 600;
     text-transform: uppercase;
     margin: 0.5rem 0 0.5rem;
+    
 }
 
 .products-container .box .content{
