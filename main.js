@@ -17,13 +17,6 @@ function cargarCarritoDesdeElLocalStorage(){
 
 
 
-
-
-
-
-
-
-
 let search = document.querySelector('.search-box');
 document.querySelector('#search-icon').onclick = () => {
     search.classList.toggle('active');
@@ -31,16 +24,12 @@ document.querySelector('#search-icon').onclick = () => {
 
 let navbar = document.querySelector('.navbar');
 document.querySelector('#menu-icon').onclick = () => {
-    search.classList.toggle('active');
+    navbar.classList.toggle('active');
 }
-
-
-
 
  let header = document.querySelector('header');
  window.addEventListener('scroll', () =>{
     header.classList.toggle('shadow',window.scrollY > 0);
-
  });
 
 console.table(productos);
@@ -72,18 +61,18 @@ const diasParaFinDeMes = diasEnElMes - ahora.day;
 function renderizarProductos(listaProds) {
     for (const prod of listaProds) {
         contenedorProds.innerHTML += `
-
         <div class="products-container">
-        <div class="box">
-          <img src=${prod.foto} alt="" />
-          <h3>Nombre: ${prod.nombre}</h3>
-          <div class="content">
-            <span>$${prod.precio}</span>
-            <button class="btn btn-primary compra" id=${prod.id}>Agregar al carrito</button>
-            </a>
-          </div>
-        </div>
-      </div>
+                <div class="box" style="position:relative;padding:10px;display:flex;flex-direction:colum;justify-content:center;border-radius:0.5rem">
+                    <img src=${prod.foto} alt="" />
+                    <h3>Nombre: ${prod.nombre}</h3>
+                    <div class="content">
+                        <span>$${prod.precio}</span>
+                        <button class="btn btn-primary compra" id=${prod.id}>Agregar al carrito</button>
+                        </a>
+                    </div>
+                </div>
+         </div>
+    
         `
     }
 
@@ -129,7 +118,6 @@ function agregarACarrito(producto) {
     document.getElementById('total').innerText = 'Total a pagar $: ' + totalAcumulado;
 }
 
-//evento para finalizar la compra
 //evento para finalizar la compra
 botonFinalizar.onclick = () => {
     if (carrito.length === 0) {

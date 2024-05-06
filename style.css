@@ -36,13 +36,13 @@ header{
     width: 100%;
     top: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 10000;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 18px 100px;
-    transition: 0.5 linear;
-    background: black;
+    transition: 0.5s linear;
+    background: var(--text-color);
 
 }
 .header.shadow{
@@ -71,6 +71,8 @@ header{
     border-radius: 0.2rem;
     transition: 0.2s all linear;
 }
+
+
 .header-icon{
     font-size: 22px;
     cursor: pointer;
@@ -79,13 +81,7 @@ header{
     column-gap: 0.8rem;
 
 }
-.header-icon{
-    font-size: 22px;
-    cursor: pointer;
-    z-index: 10000;
-    display: flexbox;
-    column-gap: 0.8rem;
-}
+
 .header-icon .bx{
     color: var(--bg-color);
 }
@@ -133,7 +129,7 @@ header{
 .home{
     width: 100%;
     min-height: 100vh;
-    background: url();
+    background: url(img/fondo.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -160,10 +156,12 @@ header{
     background: var(--main-color);
     color: var(--bg-color);
     font-weight: 500;
+    border-color: white;
 }
 
 .btn:hover{
     background: #8a6f4d;
+    border-color: white;
 }
 
 .about{
@@ -185,9 +183,6 @@ header{
     margin: 0.5rem 0 1.1rem;
 }
 
-
-
-
 .heading{
     text-align: center;
 }
@@ -198,21 +193,22 @@ header{
 
 .products-container{
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280rem,auto));
-    gap:1.5rem;
+    grid-template-columns: repeat(auto-fit,minmax(280px,auto));
+    gap: 1.5rem;
     margin-top: 2rem;
 }
 
-/*.products-container .box{ */
-.products-container {
+.products-container .box {
     position: relative;
     padding: 10px;
-    display: flex;
+    display: column;
     flex-direction: column;
     justify-content: center;
     border-radius: 0.5rem;
     box-shadow: var(--box-shadow);
+
 }
+
 
 .products-container img{
     width: 100%;
@@ -311,7 +307,7 @@ header{
 }
 
 .footer-box h2{
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 10px;
 }
@@ -337,8 +333,6 @@ header{
 .social a .bx:hover{
     background: var(--main-color);
     color: var(--bg-color);
-
-
 }
 
 .footer-box h3{
@@ -376,6 +370,18 @@ header{
     background: var(--second-color);
  }
 
+ @media (max-windth:1058px){
+    header{
+        padding: 16px 60px;
+    }
+    section{
+        padding: 50px 60px;
+    }
+    .home-text h1{
+        font-size: 2.4rem;
+    }
+ }
+
  @media (max-width:991px){
     header{
         padding: 16px 4%;
@@ -408,7 +414,6 @@ header{
         padding: 20px;
         transition: 0.3s;
         text-align: center;
-
     }
     .navbar a{
         color: var(--text-color);
@@ -417,7 +422,11 @@ header{
         color: var(--bg-color);
     }
 
+    .navbar.active{
+        top:100% ;
+    }
  }
+
 
 
 
