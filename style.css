@@ -399,6 +399,10 @@ header{
  }
 
  @media (max-width:768px){
+
+    #home{
+        margin-top: 5%;
+    }
     header{
         padding: 12px 4%;
     }
