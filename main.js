@@ -6,16 +6,16 @@ function guardarCarritoEnLocalStorage(){
 }
 
 /*Funcion para cargar  el carrito desde el almacenamiento del local al cargar la pagina */
-function cargarCarritoDesdeElLocalStorage(){
-    const carritoGuardado = localStorage.getItem('carrito');
-    if (carritoGuardado){
-        carrito.JSON.parse(carritoGuardado);
-        /*Renderizar los productos del carrito al cargar la pagina */
-        carrito.forEach(producto => agregarProductoAlCarrito(producto));
+
+async function cargarCarritoDesdeElLocalStorage(){
+    try{
+        const responso = await fetch('productos.json');
+        const productos = await Response.json();
+        renderizarProductos(productos);
+    }catch(error){
+        console.error('Error al cargar los productos',error);
     }
 }
-
-
 
 let search = document.querySelector('.search-box');
 document.querySelector('#search-icon').onclick = () => {
@@ -151,3 +151,6 @@ function vaciarCarro() {
 botonVaciar.onclick = () => {
     vaciarCarro();
 }
+
+// Llamar a la función para cargar los productos desde el archivo productos.js
+cargarCarritoDesdeElLocalStorage();
