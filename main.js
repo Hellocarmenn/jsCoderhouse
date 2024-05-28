@@ -7,10 +7,12 @@ function guardarCarritoEnLocalStorage(){
 
 /*Funcion para cargar  el carrito desde el almacenamiento del local al cargar la pagina */
 
-async function cargarCarritoDesdeElLocalStorage(){
+
+//esto es un fetch
+async function fetchData(){
     try{
-        const responso = await fetch('productos.json');
-        const productos = await Response.json();
+        const response = await fetch('./productos.json');
+        const productos = await response.json();
         renderizarProductos(productos);
     }catch(error){
         console.error('Error al cargar los productos',error);
@@ -32,8 +34,9 @@ document.querySelector('#menu-icon').onclick = () => {
     header.classList.toggle('shadow',window.scrollY > 0);
  });
 
-console.table(productos);
-let carrito = [];
+
+//buscando en el local storage
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
 const contenedorProds = document.getElementById('products');
 const tablaBody = document.getElementById('tablabody');
@@ -90,7 +93,6 @@ function renderizarProductos(listaProds) {
     }
 }
 
-renderizarProductos(productos);
 
 function agregarACarrito(producto) {
     carrito.push(producto);
@@ -106,18 +108,27 @@ function agregarACarrito(producto) {
         confirmButtonColor: '#bc9667',
     });
     console.table(carrito);
-    tablaBody.innerHTML += `
-    <tr>
-        <td>${producto.id}</td>
-        <td>${producto.nombre}</td>
-        <td>${producto.precio}</td>
-    </tr>
-    `
+    renderizarCarrito()
     //agregar calculo de total
     let totalAcumulado = carrito.reduce((acum, prod) => acum + prod.precio, 0);
     document.getElementById('total').innerText = 'Total a pagar $: ' + totalAcumulado;
 }
 
+
+function renderizarCarrito(){
+    //se vacia para ingresar los productos
+    tablaBody.innerHTML = "";
+    carrito.forEach((producto)=>{
+        tablaBody.innerHTML += `
+        <tr>
+            <td>${producto.id}</td>
+            <td>${producto.nombre}</td>
+            <td>${producto.precio}</td>
+        </tr>
+        `
+    })
+}
+renderizarCarrito()
 //evento para finalizar la compra
 botonFinalizar.onclick = () => {
     if (carrito.length === 0) {
@@ -153,4 +164,4 @@ botonVaciar.onclick = () => {
 }
 
 // Llamar a la función para cargar los productos desde el archivo productos.js
-cargarCarritoDesdeElLocalStorage();
+fetchData();
